@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hazirlik_puan_hesaplama/final_hesaplama.dart';
 import 'package:hazirlik_puan_hesaplama/hesaplama_ekrani.dart';
+import 'package:hazirlik_puan_hesaplama/last_menu.dart';
 import 'package:hazirlik_puan_hesaplama/menu.dart';
 import 'package:hazirlik_puan_hesaplama/new_menu.dart';
 import 'package:hazirlik_puan_hesaplama/pro_sinav_hesaplama.dart';
+import 'package:hazirlik_puan_hesaplama/renkler.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter/services.dart';
@@ -41,9 +43,9 @@ class _SplashScreenState extends State<SplashScreen> {
     final double yukseklik=ekranBilgisi.size.height;
     final double genislik=ekranBilgisi.size.width;
     return AnimatedSplashScreen(
-      nextScreen: menu2(),
+      nextScreen: lastMenu(),
       splash: Lottie.asset("resimler/kelebex.json"),
-      backgroundColor: Color(0xff0D47A1),
+      backgroundColor: arkaPlan,
       splashIconSize:genislik,
       duration: 1600,
       splashTransition: SplashTransition.slideTransition,

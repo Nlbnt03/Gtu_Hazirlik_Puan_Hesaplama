@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hazirlik_puan_hesaplama/last_menu.dart';
 import 'package:hazirlik_puan_hesaplama/new_menu.dart';
+import 'package:hazirlik_puan_hesaplama/renkler.dart';
 
 class infoPage extends StatefulWidget {
   const infoPage({super.key});
@@ -7,28 +9,30 @@ class infoPage extends StatefulWidget {
   @override
   State<infoPage> createState() => _infoPageState();
 }
-
+Future <bool> geridonustusu2 (BuildContext context) async{
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => lastMenu(),));
+  return true;
+}
 class _infoPageState extends State<infoPage> {
   @override
   Widget build(BuildContext context) {
     var ekranBilgisi = MediaQuery.of(context);
     final double yukseklik=ekranBilgisi.size.height;
     final double genislik=ekranBilgisi.size.width;
-    final String text1=
-        "";
+    final String text1= "";
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => menu2(),));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => lastMenu(),));
           },
           icon: Icon(Icons.arrow_back),
         ),
         title: Text("Bilgilendirme Sayfası"),
-        backgroundColor: Color(0xff0D47A1),
+        backgroundColor: appbarRenk,
         centerTitle: true,
       ),
-      backgroundColor: Color(0xff0D47A1),
+      backgroundColor: arkaPlan,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 15.0),
@@ -46,7 +50,7 @@ class _infoPageState extends State<infoPage> {
                         RichText(
                           text: TextSpan(
                             text:  "- Merhaba,ben Yusuf Nalbant,Gebze Teknik Üniversitesi Hazırlık Programı uygulamasının geliştiricisiyim. Bu uygulama, hazırlık okuyan öğrenciler için çeşitli hesaplama seçenekleri sunmaktadır.İşte bu seçenekler:\n\n",
-                            style: TextStyle(fontSize: 15,color: Colors.black,fontFamily: 'Monospace'),
+                            style: TextStyle(fontSize: 15,color: Colors.white,fontFamily: 'Monospace'),
                             children: [
                               TextSpan(
                                 text: "1-)Dönem Ortalama Hesaplama:",
@@ -54,7 +58,7 @@ class _infoPageState extends State<infoPage> {
                               ),
                               TextSpan(
                                   text: " Mevcut dönem notlarınızdan dönem ortalamasını hesaplayın.\n\n",
-                                  style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,fontFamily: 'Monospace'),
+                                  style: TextStyle(color: Colors.white,fontWeight: FontWeight.normal,fontFamily: 'Monospace'),
                               ),
                               TextSpan(
                                   text: "2-)Haziran Ayındaki Proficiency Sınavına Giriş Sorgulama:",
@@ -62,7 +66,7 @@ class _infoPageState extends State<infoPage> {
                               ),
                               TextSpan(
                                   text: " Haziran ayındaki Proficiency sınavına giriş şartlarını kontrol edin.\n\n",
-                                  style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,fontFamily: 'Monospace')
+                                  style: TextStyle(color: Colors.white,fontWeight: FontWeight.normal,fontFamily: 'Monospace')
                               ),
                               TextSpan(
                                   text: "3-)Haziran Ayındaki Proficiency Sınavına Girebilmek İçin Minimum Final Notu:",
@@ -70,7 +74,7 @@ class _infoPageState extends State<infoPage> {
                               ),
                               TextSpan(
                                   text: " Proficiency sınavına girebilmek için 2. dönem final notunuzun minimum kaç olması gerektiğini öğrenin.\n\n",
-                                  style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,fontFamily: 'Monospace')
+                                  style: TextStyle(color: Colors.white,fontWeight: FontWeight.normal,fontFamily: 'Monospace')
                               ),
                               TextSpan(
                                   text: "4-)1. Dönemi 65 Ortalama ile Bitirebilmek İçin Minimum Final Notu:",
@@ -78,11 +82,11 @@ class _infoPageState extends State<infoPage> {
                               ),
                               TextSpan(
                                   text: " 1. dönemi 65 ortalama ile tamamlayabilmek için finalden minimum kaç almanız gerektiğini hesaplayın.\n\n",
-                                  style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,fontFamily: 'Monospace',)
+                                  style: TextStyle(color: Colors.white,fontWeight: FontWeight.normal,fontFamily: 'Monospace',)
                               ),
                               TextSpan(
                                   text: "Uygulama ile ilgili geri bildirimde bulunmak için menüde sağ alt kısımda bulunan buton üzerinden sosyal medya hesaplarıma ulaşabilirsiniz. Her türlü soru ve önerilere açığım. İyi çalışmalar!",
-                                  style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal)
+                                  style: TextStyle(color: Colors.white,fontWeight: FontWeight.normal)
                               ),
                             ]
                           ),
@@ -92,7 +96,7 @@ class _infoPageState extends State<infoPage> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    color: Colors.white,
+                    color: menuRenk,
                   ),
                 )
               ],

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hazirlik_puan_hesaplama/last_menu.dart';
 import 'package:hazirlik_puan_hesaplama/menu.dart';
 import 'package:hazirlik_puan_hesaplama/new_menu.dart';
 import 'package:hazirlik_puan_hesaplama/pro_girme_hak.dart';
+import 'package:hazirlik_puan_hesaplama/renkler.dart';
 
 class pro_hesaplama extends StatefulWidget {
   const pro_hesaplama({Key? key}) : super(key: key);
@@ -67,6 +69,10 @@ class _pro_hesaplamaState extends State<pro_hesaplama> {
   double donem2=0;
   double ortalama=0;
   int new_ortalama=0;
+  Future <bool> geridonustusu (BuildContext context) async{
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => lastMenu(),));
+    return true;
+  }
   @override
   Widget build(BuildContext context) {
     var ekranBilgisi=MediaQuery.of(context);
@@ -76,15 +82,15 @@ class _pro_hesaplamaState extends State<pro_hesaplama> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => menu2(),));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => lastMenu(),));
           },
           icon: Icon(Icons.arrow_back),
         ),
         title: Text("GTU Hazırlık Uygulaması"),
         centerTitle: true,
-        backgroundColor: Color(0xff0D47A1),
+        backgroundColor: appbarRenk,
       ),
-      backgroundColor: Color(0xff0D47A1),
+      backgroundColor: arkaPlan,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -98,7 +104,7 @@ class _pro_hesaplamaState extends State<pro_hesaplama> {
               child: Card(
                 shadowColor: Colors.black,
                 elevation: 10,
-                color: Colors.white,
+                color: menuRenk,
                 shape:RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -108,7 +114,9 @@ class _pro_hesaplamaState extends State<pro_hesaplama> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("1. Dönem Ortalama :"),
+                        Text("1. Dönem Ortalama :",style: TextStyle(
+                          color: Colors.white
+                        )),
                         SizedBox(
                           width: genislik/4,
                           height: yukseklik/16,
@@ -134,7 +142,9 @@ class _pro_hesaplamaState extends State<pro_hesaplama> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("2. Dönem Ortalama :"),
+                            Text("2. Dönem Ortalama :",style: TextStyle(
+                              color: Colors.white
+                            )),
                             SizedBox(
                               width: genislik/4,
                               height: yukseklik/16,
@@ -165,7 +175,7 @@ class _pro_hesaplamaState extends State<pro_hesaplama> {
                             width: genislik/4,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.black
+                                primary: buttonRenk
                               ),
                               child: Text("Hesapla"),
                               onPressed: (){
@@ -220,7 +230,7 @@ class _pro_hesaplamaState extends State<pro_hesaplama> {
                           width: genislik/4,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.black
+                              primary: buttonRenk
                             ),
                             child: Text("Sıfırla"),
                             onPressed: (){

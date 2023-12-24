@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hazirlik_puan_hesaplama/last_menu.dart';
 import 'package:hazirlik_puan_hesaplama/menu.dart';
 import 'package:hazirlik_puan_hesaplama/new_menu.dart';
 import 'package:hazirlik_puan_hesaplama/pro_sinav_hesaplama.dart';
+import 'package:hazirlik_puan_hesaplama/renkler.dart';
 
 class pro_girme_hak extends StatefulWidget {
   bool sonuc;
@@ -70,15 +72,15 @@ class _pro_girme_hakState extends State<pro_girme_hak> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => menu2(),));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => pro_hesaplama(),));
           },
           icon: Icon(Icons.arrow_back),
         ),
         title: Text("GTU Hazırlık Uygulaması"),
         centerTitle: true,
-        backgroundColor: Color(0xff0D47A1),
+        backgroundColor: appbarRenk,
       ),
-      backgroundColor: Color(0xff0D47A1),
+      backgroundColor: menuRenk,
       body: WillPopScope(
         onWillPop: () => geridonustusu(context),
         child: Center(
@@ -126,7 +128,7 @@ class _pro_girme_hakState extends State<pro_girme_hak> {
                             width: genislik/2,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    primary: Colors.black
+                                    primary: appbarRenk
                                 ),
                                 onPressed:(){
                                   Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => pro_hesaplama(),));

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hazirlik_puan_hesaplama/last_menu.dart';
 import 'package:hazirlik_puan_hesaplama/menu.dart';
 import 'package:hazirlik_puan_hesaplama/new_menu.dart';
+import 'package:hazirlik_puan_hesaplama/renkler.dart';
 import 'package:hazirlik_puan_hesaplama/sonuc_ekrani.dart';
 import 'dart:math';
 
@@ -89,6 +91,10 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
   double video=0;
   int ortalama =0;
   @override
+  Future <bool> geridonustusu3 (BuildContext context) async{
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => lastMenu(),));
+    return true;
+  }
   Widget build(BuildContext context) {
     var ekranBilgisi=MediaQuery.of(context);
     final double yukseklik=ekranBilgisi.size.height;
@@ -97,15 +103,15 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => menu2(),));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => lastMenu(),));
           },
           icon: Icon(Icons.arrow_back),
         ),
         title: Text("GTU Hazırlık Uygulaması"),
         centerTitle: true,
-        backgroundColor: Color(0xff0D47A1),
+        backgroundColor: appbarRenk,
       ),
-      backgroundColor: Color(0xff0D47A1),
+      backgroundColor: arkaPlan,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +121,7 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
               padding: const EdgeInsets.all(8.0),
               child: Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                color: Colors.white,
+                color: menuRenk,
                 elevation: 10,
                 shadowColor: Colors.black,
                 child: Column(
@@ -127,8 +133,9 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("1. Vize :",style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
                           )),
                           SizedBox(
                             width: genislik/4,
@@ -155,8 +162,9 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("2. Vize :",style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
                           )),
                           SizedBox(
                             width: genislik/4,
@@ -183,8 +191,9 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("1. Reading :",style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
                           )),
                           SizedBox(
                             width: genislik/4,
@@ -211,8 +220,9 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("2. Reading :",style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
                           )),
                           SizedBox(
                             width: genislik/4,
@@ -239,8 +249,9 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("Speaking :",style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
                           )),
                           SizedBox(
                             width: genislik/4,
@@ -297,6 +308,7 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
                           Text("Final :",style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
+                              color: Colors.white
                           )),
                           SizedBox(
                             width: genislik/4,
@@ -323,6 +335,7 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
                         Text("Poster Sunumu :",style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
+                            color: Colors.white
                         )),
                         SizedBox(
                           width: genislik/4,
@@ -351,7 +364,7 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
                             width: genislik/3,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  primary: Colors.black
+                                  primary: buttonRenk
                               ),
                               child: Text("HESAPLA",style: TextStyle(
                                   color: Colors.white,
@@ -464,7 +477,7 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
                           width: genislik/3,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.black,
+                              primary: buttonRenk,
                             ),
                             onPressed: (){
                               tfcontroller8.clear();

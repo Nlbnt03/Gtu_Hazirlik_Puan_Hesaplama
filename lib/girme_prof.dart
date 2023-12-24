@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hazirlik_puan_hesaplama/last_menu.dart';
 import 'package:hazirlik_puan_hesaplama/menu.dart';
 import 'package:hazirlik_puan_hesaplama/new_menu.dart';
+import 'package:hazirlik_puan_hesaplama/renkler.dart';
 class girme_prof extends StatefulWidget {
   const girme_prof({Key? key}) : super(key: key);
 
@@ -102,7 +104,10 @@ class _girme_profState extends State<girme_prof> {
     _bannerAd!.load();
     _ad!.load();
   }
-
+  Future <bool> geridonustusu4 (BuildContext context) async{
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => lastMenu(),));
+    return true;
+  }
   @override
   Widget build(BuildContext context) {
     var ekranBilgisi=MediaQuery.of(context);
@@ -112,15 +117,15 @@ class _girme_profState extends State<girme_prof> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => menu2(),));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => lastMenu(),));
           },
           icon: Icon(Icons.arrow_back),
         ),
         title: Text("GTU Hazırlık Uygulaması"),
         centerTitle: true,
-        backgroundColor: Color(0xff0D47A1),
+        backgroundColor: appbarRenk,
       ),
-      backgroundColor: Color(0xff0D47A1),
+      backgroundColor: arkaPlan,
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -146,7 +151,7 @@ class _girme_profState extends State<girme_prof> {
                         )
                       ],
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
+                      color: menuRenk,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -155,7 +160,7 @@ class _girme_profState extends State<girme_prof> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text("Gerekli Not : ${format}",style: TextStyle(
-                                color: Colors.red,
+                                color: buttonRenk,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 30
                             ),),
@@ -167,7 +172,7 @@ class _girme_profState extends State<girme_prof> {
                             Text("1.Dönem Ortalama :  ",style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black
+                                color: Colors.white
                             )),
                             Padding(
                               padding: const EdgeInsets.only(top: 5.0),
@@ -206,7 +211,7 @@ class _girme_profState extends State<girme_prof> {
                             Text("1.Vize :  ",style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black
+                                color: Colors.white
                             )),
                             Padding(
                               padding: const EdgeInsets.only(top: 5.0),
@@ -245,7 +250,7 @@ class _girme_profState extends State<girme_prof> {
                             Text("2.Vize :  ",style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black
+                                color: Colors.white
                             )),
                             Padding(
                               padding: const EdgeInsets.only(top: 5.0),
@@ -284,7 +289,7 @@ class _girme_profState extends State<girme_prof> {
                             Text("1. Reading :  ",style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black
+                                color: Colors.white
                             )),
                             Padding(
                               padding: const EdgeInsets.only(top: 5.0),
@@ -323,7 +328,7 @@ class _girme_profState extends State<girme_prof> {
                             Text("2.Reading :  ",style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black
+                                color: Colors.white
                             )),
                             Padding(
                               padding: const EdgeInsets.only(top: 5.0),
@@ -362,7 +367,7 @@ class _girme_profState extends State<girme_prof> {
                             Text("Speaking :  ",style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black
+                                color: Colors.white
                             )),
                             Padding(
                               padding: const EdgeInsets.only(top: 5.0),
@@ -440,7 +445,7 @@ class _girme_profState extends State<girme_prof> {
                             Text("Sunum :  ",style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black
+                                color: Colors.white
                             )),
                             Padding(
                               padding: const EdgeInsets.only(top: 5.0),
@@ -514,7 +519,7 @@ class _girme_profState extends State<girme_prof> {
                                     },
                                     child: Text("Hesapla"),
                                     style: ElevatedButton.styleFrom(
-                                      primary: Colors.black,
+                                      primary: buttonRenk,
                                     )),
                               ),
                             ),
@@ -533,7 +538,7 @@ class _girme_profState extends State<girme_prof> {
                                   },
                                   child: Text("Sıfırla"),
                                   style: ElevatedButton.styleFrom(
-                                    primary: Colors.black,
+                                    primary: buttonRenk,
                                   )),
                             )
                           ],

@@ -211,7 +211,7 @@ class _menu2State extends State<menu2> with TickerProviderStateMixin {
                     child: SizedBox(
                         width: genislik/1.5,
                         height: yukseklik/5,
-                        child: Image.asset("resimler/nalbant.png",)
+                        child: Image.asset("resimler/",)
                     ),
                   ),
                 ),

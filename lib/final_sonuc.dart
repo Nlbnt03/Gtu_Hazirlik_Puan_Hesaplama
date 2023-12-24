@@ -3,6 +3,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hazirlik_puan_hesaplama/final_hesaplama.dart';
 import 'package:hazirlik_puan_hesaplama/menu.dart';
 import 'package:hazirlik_puan_hesaplama/new_menu.dart';
+import 'package:hazirlik_puan_hesaplama/renkler.dart';
 
 class final_sonuc extends StatefulWidget {
   int sonuc;
@@ -56,6 +57,10 @@ class _final_sonucState extends State<final_sonuc> {
     _bannerAd!.load();
     _ad!.load();
   }
+  Future <bool> geridonustusu (BuildContext context) async{
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => final_hesaplama(),));
+    return true;
+  }
   @override
   Widget build(BuildContext context) {
     var ekranBilgisi = MediaQuery.of(context);
@@ -65,15 +70,15 @@ class _final_sonucState extends State<final_sonuc> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => menu2(),));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => final_hesaplama(),));
           },
           icon: Icon(Icons.arrow_back),
         ),
         title: Text("GTU Hazırlık Uygulaması"),
         centerTitle: true,
-        backgroundColor: Color(0xff0D47A1),
+        backgroundColor: appbarRenk,
       ),
-      backgroundColor:Color(0xff0D47A1) ,
+      backgroundColor: menuRenk ,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
