@@ -8,6 +8,7 @@ import 'package:hazirlik_puan_hesaplama/renkler.dart';
 import 'package:url_launcher/url_launcher.dart';
 final Uri _url = Uri.parse("https://www.instagram.com/yusuf.nlbnt03/?igshid=MzNlNGNkZWQ4Mg%3D%3D");
 final Uri _url2= Uri.parse("https://www.linkedin.com/in/yusuf-eren-nalbant-0ba036256/");
+final Uri _url3= Uri.parse("https://play.google.com/store/apps/developer?id=Nalbantsoft");
 
 class lastMenu extends StatefulWidget {
   const lastMenu({super.key});
@@ -26,7 +27,11 @@ class lastMenu extends StatefulWidget {
       throw 'Could not launch $_url2';
     }
   }
-
+  Future<void> _launchUrl3() async {
+  if (!await launchUrl(_url3)) {
+    throw 'Could not launch $_url3';
+  }
+}
 
 
 class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
@@ -35,6 +40,7 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
   late Animation <double> scaleAnimasyonDeger;
   late Animation<double> _leftButtonAnimation;
   late Animation<double> _rightButtonAnimation;
+  late Animation<double> _bottomButtonAnimation;
   @override
   void initState() {
     // TODO: implement initState
@@ -57,6 +63,9 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
         curve: Interval(0.5, 1, curve: Curves.easeInOut),
       ),
     );
+    _bottomButtonAnimation = Tween<double>(begin: 200,end: 0).animate(
+      CurvedAnimation(parent: animasyonKontrol2, curve: Interval(0.5,1,curve: Curves.easeInOut)),
+    );
     animasyonKontrol2.forward();
   }
   @override
@@ -76,14 +85,15 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
-            child: IconButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => infoPage(),));}, icon: Icon(Icons.info_rounded,),iconSize: 33,color: appButtonRenk,),
+            child: IconButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => infoPage(),));}, icon: Icon(Icons.info_outline_rounded,),iconSize: 33,color: buttonRenk,),
           )
         ],
         backgroundColor: appbarRenk,
         title: Text("GTU Hazırlık Uygulaması",style: TextStyle(
           color: arkaPlan,
           fontWeight: FontWeight.bold,
-          fontSize: 20
+          fontSize: 20,
+          fontFamily: 'Quicksand'
         ),),
         centerTitle: true,
 
@@ -94,8 +104,8 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
         child: Column(
           children: [
             SizedBox(
-              width: 165,
-                height: 150,
+                width: genislik,
+                height: yukseklik/5.5,
                 child: Image.asset("resimler/nalbant123.png")),
             Expanded(
               child: Padding(
@@ -114,7 +124,6 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
                           color: arkaPlan,
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
-                          fontFamily: "Kanit"
                         ),),
                       ),
                       Padding(
@@ -131,7 +140,7 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
                                 builder: (context, child) {
                                   return Transform.translate(
                                   offset: Offset(_leftButtonAnimation.value,0.0),
-                                  child: buttonum("Dönem Ortalama Hesaplama"),
+                                  child: buttonum("Dönem Ortalama Hesaplama","resimler/calculater.png"),
                                   );
                                 },
                               ),
@@ -144,7 +153,7 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
                                 builder: (context, child) {
                                   return Transform.translate(
                                     offset: Offset(_rightButtonAnimation.value,0.0),
-                                    child: buttonum("Proficiency Giriş Sorgulama\n(2.dönem)"),
+                                    child: buttonum("Proficiency Giriş Sorgulama","resimler/sorgu.png"),
                                   );
                                 },
                               ),
@@ -166,7 +175,7 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
                                 builder: (context, child) {
                                   return Transform.translate(
                                     offset: Offset(_leftButtonAnimation.value,0.0),
-                                    child: buttonum("Prof İçin 2.Dönem Final Notu"),
+                                    child: buttonum("Prof İçin 2.Dönem Final Notu","resimler/hesaplama.png"),
                                   );
                                 },
                               ),
@@ -179,13 +188,36 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
                                 builder: (context, child) {
                                   return Transform.translate(
                                     offset: Offset(_rightButtonAnimation.value,0.0),
-                                    child: buttonum("1. Dönem Final Hesaplama"),
+                                    child: buttonum("1. Dönem Final Hesaplama","resimler/graphic.png"),
                                   );
                                 },
                               ),
                             ),
                           ],
                         ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: ()
+                            {
+                              _launchUrl3();
+                            },
+                            child: AnimatedBuilder(
+                              animation: _bottomButtonAnimation,
+                              builder: (context, child) {
+                                return Transform.translate(
+                                    offset: Offset(0.0,_bottomButtonAnimation.value),
+                                    child: SizedBox(
+                                        width: genislik/1.5,
+                                        height: yukseklik/5,
+                                        child: Image.asset("resimler/Nalbantsoft.png")),
+                                );
+                              },
+                            ),
+                          ),
+                        ]
                       )
                     ],
                   ),
@@ -232,7 +264,7 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
               }
             },
             backgroundColor: appButtonRenk,
-            child: Icon(Icons.add),
+            child: Icon(Icons.add,color: menuRenk),
           )
         ],
       ),
@@ -242,8 +274,10 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
 
 class buttonum extends StatelessWidget {
   String icerik;
+  String adres;
 
-  buttonum(this.icerik);
+
+  buttonum(this.icerik, this.adres);
 
   @override
   Widget build(BuildContext context) {
@@ -262,13 +296,16 @@ class buttonum extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Icon((Icons.calculate_outlined),),
+            child: SizedBox(
+              width: 45,
+                height: 45,
+                child: Image.asset(adres)),
           ),
           Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.only(left: 5.0,right: 5.0),
             child: Text(icerik,textAlign: TextAlign.center,style: TextStyle(
-                fontSize: yukseklik/50,
-                fontFamily: 'Monospace',
+                fontSize: yukseklik/60,
+                fontFamily: 'Cinzel',
                 fontWeight: FontWeight.bold
             )),
           ),

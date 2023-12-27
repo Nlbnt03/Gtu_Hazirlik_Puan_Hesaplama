@@ -74,7 +74,7 @@ class _final_sonucState extends State<final_sonuc> {
           },
           icon: Icon(Icons.arrow_back),
         ),
-        title: Text("GTU Hazırlık Uygulaması"),
+        title: Text("GTU Hazırlık Uygulaması",style: TextStyle(color: yaziRenk,fontFamily: "Quicksand",fontWeight: FontWeight.bold)),
         centerTitle: true,
         backgroundColor: appbarRenk,
       ),

@@ -76,7 +76,7 @@ class _pro_girme_hakState extends State<pro_girme_hak> {
           },
           icon: Icon(Icons.arrow_back),
         ),
-        title: Text("GTU Hazırlık Uygulaması"),
+        title: Text("GTU Hazırlık Uygulaması",style: TextStyle(color: yaziRenk,fontFamily: "Quicksand",fontWeight: FontWeight.bold)),
         centerTitle: true,
         backgroundColor: appbarRenk,
       ),
