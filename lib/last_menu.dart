@@ -211,7 +211,7 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
                                     offset: Offset(0.0,_bottomButtonAnimation.value),
                                     child: SizedBox(
                                         width: genislik/1.5,
-                                        height: yukseklik/5,
+                                        height: yukseklik/5.2,
                                         child: Image.asset("resimler/Nalbantsoft.png")),
                                 );
                               },
@@ -237,7 +237,7 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
               onPressed: _launchUrl2,
               child: Image.asset("resimler/linkedin.webp"),
               elevation: 10,
-              backgroundColor: fabRenk,
+              backgroundColor: buttonRenk,
             ),
           ),
           Padding(
@@ -247,7 +247,7 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
               child:FloatingActionButton(
                 onPressed: _launchUrl,
                 elevation: 10,
-                backgroundColor: buttonRenk,
+                backgroundColor: fabRenk,
                 child: Image.asset("resimler/pngwing.com.png"),
               ),
             ),
