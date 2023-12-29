@@ -134,7 +134,7 @@ class _sonuc_ekraniState extends State<sonuc_ekrani> {
                 child: AdWidget(ad: _ad!),):SizedBox(),
              SizedBox(
                width: genislik*3/4,
-               height: yukseklik/2,
+               height: yukseklik/1.9,
                child: Card(
                  shape: OutlineInputBorder(
                    borderRadius: BorderRadius.circular(10),

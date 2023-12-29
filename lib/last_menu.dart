@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hazirlik_puan_hesaplama/dateCounter.dart';
 import 'package:hazirlik_puan_hesaplama/final_hesaplama.dart';
 import 'package:hazirlik_puan_hesaplama/girme_prof.dart';
 import 'package:hazirlik_puan_hesaplama/hesaplama_ekrani.dart';
@@ -82,6 +83,7 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
     bool fabDurum=false;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => dateCounter(),));},icon: Icon(Icons.date_range_outlined,color: buttonRenk,size: 33)),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
@@ -211,7 +213,7 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
                                     offset: Offset(0.0,_bottomButtonAnimation.value),
                                     child: SizedBox(
                                         width: genislik/1.5,
-                                        height: yukseklik/5,
+                                        height: yukseklik/5.2,
                                         child: Image.asset("resimler/Nalbantsoft.png")),
                                 );
                               },
@@ -237,7 +239,7 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
               onPressed: _launchUrl2,
               child: Image.asset("resimler/linkedin.webp"),
               elevation: 10,
-              backgroundColor: fabRenk,
+              backgroundColor: buttonRenk,
             ),
           ),
           Padding(
@@ -247,7 +249,7 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
               child:FloatingActionButton(
                 onPressed: _launchUrl,
                 elevation: 10,
-                backgroundColor: buttonRenk,
+                backgroundColor: fabRenk,
                 child: Image.asset("resimler/pngwing.com.png"),
               ),
             ),

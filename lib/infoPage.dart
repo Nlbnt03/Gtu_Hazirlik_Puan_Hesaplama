@@ -24,7 +24,7 @@ class _infoPageState extends State<infoPage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => lastMenu(),));
+            Navigator.pop(context, MaterialPageRoute(builder: (context) => lastMenu(),));
           },
           icon: Icon(Icons.arrow_back),
         ),
