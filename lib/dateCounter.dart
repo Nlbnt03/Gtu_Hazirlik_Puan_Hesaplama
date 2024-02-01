@@ -133,14 +133,17 @@ class _dateCounterState extends State<dateCounter> {
                 ),
                 SizedBox(height: 8),
                 isExamPassed
-                    ? Text(
-                  "Bu sınavın tarihi geçmiştir",
+                    ? Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: Text(
+                  "Bu sınavın tarihi geçmiştir !",
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: Color(0xffF00000),
                   ),
-                )
+                ),
+                    )
                     : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hazirlik_puan_hesaplama/dateCounter.dart';
 import 'package:hazirlik_puan_hesaplama/final_hesaplama.dart';
 import 'package:hazirlik_puan_hesaplama/girme_prof.dart';
@@ -36,16 +37,21 @@ class lastMenu extends StatefulWidget {
 
 
 class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
+
   late AnimationController animasyonKontrol;
   late AnimationController animasyonKontrol2;
   late Animation <double> scaleAnimasyonDeger;
   late Animation<double> _leftButtonAnimation;
   late Animation<double> _rightButtonAnimation;
   late Animation<double> _bottomButtonAnimation;
+
+  late InterstitialAd _interstitialAd;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _createInterstitialAd();
     animasyonKontrol = AnimationController(
         vsync: this, duration: Duration(milliseconds: 250,));
     animasyonKontrol2 = AnimationController(
@@ -69,9 +75,41 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
     );
     animasyonKontrol2.forward();
   }
+
+  void _createInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: 'ca-app-pub-3400076691045068/9455944347',
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          _interstitialAd = ad;
+        },
+        onAdFailedToLoad: (error) {
+          _interstitialAd.dispose();
+          _createInterstitialAd();
+        },
+      ),
+    );
+  }
+
+  void _showInterstitialAdAndNavigate() {
+    _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (ad) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => dateCounter()),
+        );
+        ad.dispose();
+        _createInterstitialAd();
+      },
+    );
+    _interstitialAd.show();
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
+    _interstitialAd.dispose();
     super.dispose();
     animasyonKontrol.dispose();
   }
@@ -83,7 +121,7 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
     bool fabDurum=false;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => dateCounter(),));},icon: Icon(Icons.date_range_outlined,color: buttonRenk,size: 33)),
+        leading: IconButton(onPressed:_showInterstitialAdAndNavigate,icon: Icon(Icons.date_range_outlined,color: buttonRenk,size: 33)),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
