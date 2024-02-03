@@ -45,13 +45,10 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
   late Animation<double> _rightButtonAnimation;
   late Animation<double> _bottomButtonAnimation;
 
-  late InterstitialAd _interstitialAd;
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _createInterstitialAd();
     animasyonKontrol = AnimationController(
         vsync: this, duration: Duration(milliseconds: 250,));
     animasyonKontrol2 = AnimationController(
@@ -76,40 +73,67 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
     animasyonKontrol2.forward();
   }
 
-  void _createInterstitialAd() {
+// Geçiş reklamını temsil eden değişken
+  InterstitialAd? _interstitialAd;
+
+  // AdMob reklam birim kimliği
+  final adUnitId = "ca-app-pub-3400076691045068/9455944347"; // Test birim kimliği
+
+  // Geçiş reklamını yükleme ve gösterme fonksiyonu
+  bool _isButtonDisabled = false; // Başlangıçta butonun devre dışı olmadığını belirten bir bayrak
+
+  void loadAndShowAd(BuildContext context) {
+    if (_isButtonDisabled) {
+      // Eğer buton devre dışıysa, reklam yükleme işlemi devam etmemeli
+      return;
+    }
+
+    _isButtonDisabled = true; // Buton devre dışı bırakılıyor
+
     InterstitialAd.load(
-      adUnitId: 'ca-app-pub-3400076691045068/9455944347',
+      adUnitId: adUnitId,
       request: AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
           _interstitialAd = ad;
+          _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              // Reklam kapatıldığında
+              _interstitialAd!.dispose(); // Reklamı temizle
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => dateCounter()),
+              );
+              _isButtonDisabled = false; // Butonu tekrar etkinleştir
+            },
+            onAdFailedToShowFullScreenContent: (ad, error) {
+              // Reklam gösteriminde hata oluştuğunda
+              debugPrint('Ad failed to show: $error');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => dateCounter()),
+              );
+              _isButtonDisabled = false; // Butonu tekrar etkinleştir
+            },
+          );
+          _interstitialAd!.show();
         },
         onAdFailedToLoad: (error) {
-          _interstitialAd.dispose();
-          _createInterstitialAd();
+          // Reklam yüklenemediğinde
+          debugPrint('Ad failed to load: $error');
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => dateCounter()),
+          );
+          _isButtonDisabled = false; // Butonu tekrar etkinleştir
         },
       ),
     );
   }
 
-  void _showInterstitialAdAndNavigate() {
-    _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
-      onAdDismissedFullScreenContent: (ad) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => dateCounter()),
-        );
-        ad.dispose();
-        _createInterstitialAd();
-      },
-    );
-    _interstitialAd.show();
-  }
-
-  @override
+@override
   void dispose() {
     // TODO: implement dispose
-    _interstitialAd.dispose();
     super.dispose();
     animasyonKontrol.dispose();
   }
@@ -121,7 +145,11 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
     bool fabDurum=false;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed:_showInterstitialAdAndNavigate,icon: Icon(Icons.date_range_outlined,color: buttonRenk,size: 33)),
+        leading: IconButton(
+            onPressed:(){
+              loadAndShowAd(context);
+            },
+            icon: Icon(Icons.date_range_outlined,color: buttonRenk,size: 33)),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
