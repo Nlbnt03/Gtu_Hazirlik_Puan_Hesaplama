@@ -20,7 +20,7 @@ void main() {
     DeviceOrientation.portraitUp,
   ]);
   MobileAds.instance.initialize();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -40,9 +40,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   Widget build(BuildContext context) {
+
     var ekranBilgisi=MediaQuery.of(context);
     final double yukseklik=ekranBilgisi.size.height;
     final double genislik=ekranBilgisi.size.width;
+
     return AnimatedSplashScreen(
       nextScreen: lastMenu(),
       splash: Lottie.asset("resimler/kelebex.json"),
@@ -52,16 +54,12 @@ class _SplashScreenState extends State<SplashScreen> {
       splashTransition: SplashTransition.slideTransition,
       pageTransitionType: PageTransitionType.leftToRight,
       animationDuration: const Duration(seconds: 1),
-
-
-
     );
   }
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -81,7 +79,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

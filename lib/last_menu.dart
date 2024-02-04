@@ -36,7 +36,7 @@ class lastMenu extends StatefulWidget {
 }
 
 
-class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
+class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin, WidgetsBindingObserver {
 
   late AnimationController animasyonKontrol;
   late AnimationController animasyonKontrol2;
@@ -45,10 +45,15 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
   late Animation<double> _rightButtonAnimation;
   late Animation<double> _bottomButtonAnimation;
 
+
+  late InterstitialAd _interstitialAd;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+    _loadInterstitialAd();
     animasyonKontrol = AnimationController(
         vsync: this, duration: Duration(milliseconds: 250,));
     animasyonKontrol2 = AnimationController(
@@ -72,82 +77,62 @@ class _lastMenuState extends State<lastMenu> with TickerProviderStateMixin {
     );
     animasyonKontrol2.forward();
   }
+@override
+  void dispose() {
+    // TODO: implement dispose
+    WidgetsBinding.instance!.removeObserver(this);
+    _interstitialAd.dispose();
+    super.dispose();
+    animasyonKontrol.dispose();
+  }
 
-// Geçiş reklamını temsil eden değişken
-  InterstitialAd? _interstitialAd;
-
-  // AdMob reklam birim kimliği
-  final adUnitId = "ca-app-pub-3400076691045068/9455944347"; // Test birim kimliği
-
-  // Geçiş reklamını yükleme ve gösterme fonksiyonu
-  bool _isButtonDisabled = false; // Başlangıçta butonun devre dışı olmadığını belirten bir bayrak
-
-  void loadAndShowAd(BuildContext context) {
-    if (_isButtonDisabled) {
-      // Eğer buton devre dışıysa, reklam yükleme işlemi devam etmemeli
-      return;
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      _loadInterstitialAd(); // Her uygulama tekrar aktifleştirildiğinde reklamı yükle
     }
+  }
 
-    _isButtonDisabled = true; // Buton devre dışı bırakılıyor
-
+  void _loadInterstitialAd() {
     InterstitialAd.load(
-      adUnitId: adUnitId,
+      adUnitId: "ca-app-pub-3400076691045068/9455944347",
       request: AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
           _interstitialAd = ad;
-          _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
-            onAdDismissedFullScreenContent: (ad) {
-              // Reklam kapatıldığında
-              _interstitialAd!.dispose(); // Reklamı temizle
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => dateCounter()),
-              );
-              _isButtonDisabled = false; // Butonu tekrar etkinleştir
-            },
-            onAdFailedToShowFullScreenContent: (ad, error) {
-              // Reklam gösteriminde hata oluştuğunda
-              debugPrint('Ad failed to show: $error');
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => dateCounter()),
-              );
-              _isButtonDisabled = false; // Butonu tekrar etkinleştir
-            },
-          );
-          _interstitialAd!.show();
+          _showInterstitialAd();
         },
         onAdFailedToLoad: (error) {
-          // Reklam yüklenemediğinde
-          debugPrint('Ad failed to load: $error');
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => dateCounter()),
-          );
-          _isButtonDisabled = false; // Butonu tekrar etkinleştir
+          print('InterstitialAd failed to load: $error');
         },
       ),
     );
   }
+  bool _isAdShown = false;
 
-@override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    animasyonKontrol.dispose();
+  void _showInterstitialAd() {
+    if (!_isAdShown && _interstitialAd != null) { // Bayrağın durumunu kontrol edin
+      _interstitialAd.show();
+      _isAdShown = true; // Reklamı gösterildi olarak işaretle
+    } else {
+      print('Interstitial ad not yet loaded or already shown');
+    }
   }
+
   @override
   Widget build(BuildContext context) {
+
     var ekranBilgisi = MediaQuery.of(context);
     double yukseklik = ekranBilgisi.size.height;
     double genislik = ekranBilgisi.size.width;
     bool fabDurum=false;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
             onPressed:(){
-              loadAndShowAd(context);
+             Navigator.push(context, MaterialPageRoute(builder: (context) => dateCounter(),));
             },
             icon: Icon(Icons.date_range_outlined,color: buttonRenk,size: 33)),
         actions: [
