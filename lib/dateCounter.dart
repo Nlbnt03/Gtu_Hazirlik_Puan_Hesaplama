@@ -77,7 +77,7 @@ class _dateCounterState extends State<dateCounter> {
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 1,
-            childAspectRatio: 3
+            childAspectRatio: 2.8
         ),
         itemCount: remainingTimes.length,
         itemBuilder: (BuildContext context, int index) {

@@ -103,8 +103,8 @@ class _final_sonucState extends State<final_sonuc> {
                       child:widget.durum? Text("${widget.sonuc}",style: TextStyle(fontSize: 25,color: Colors.red,fontWeight: FontWeight.bold),):Text("Sen Kaldın",style: TextStyle(fontSize: 25,color: Colors.red,fontWeight: FontWeight.bold),)
                     ),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.black),
-                      child: Text("Tekrar Hesapla"),
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                      child: Text("Tekrar Hesapla",style: TextStyle(color: Colors.white),),
                       onPressed: (){
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => final_hesaplama(),));
                       },

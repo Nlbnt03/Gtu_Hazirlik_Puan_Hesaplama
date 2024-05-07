@@ -320,9 +320,9 @@ class _final_hesaplamaState extends State<final_hesaplama> {
                           width: ekranGenisligi/4,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: buttonRenk
+                                backgroundColor: buttonRenk
                             ),
-                            child: Text("HESAPLA",style: TextStyle(
+                            child: Text("Hesapla",style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13
@@ -429,7 +429,7 @@ class _final_hesaplamaState extends State<final_hesaplama> {
                             width: ekranGenisligi/4,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: buttonRenk,
+                                backgroundColor: buttonRenk,
                               ),
                               onPressed: (){
                                 tfcontroller8.clear();
@@ -440,7 +440,7 @@ class _final_hesaplamaState extends State<final_hesaplama> {
                                 tfcontroller2.clear();
                                 tfcontroller1.clear();
                               },
-                              child: Text("Sıfırla",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 14),),
+                              child: Text("Sıfırla",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 13),),
                             ),
                           ),
                         ),

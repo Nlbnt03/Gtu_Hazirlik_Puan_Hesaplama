@@ -4,6 +4,7 @@ import 'package:hazirlik_puan_hesaplama/last_menu.dart';
 import 'package:hazirlik_puan_hesaplama/menu.dart';
 import 'package:hazirlik_puan_hesaplama/new_menu.dart';
 import 'package:hazirlik_puan_hesaplama/renkler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class girme_prof extends StatefulWidget {
   const girme_prof({Key? key}) : super(key: key);
 
@@ -41,6 +42,9 @@ class _girme_profState extends State<girme_prof> {
   double final_not=0;
   double gecici_not=0;
   String format="";
+  double second_tmp =0;
+  double should_be_second = 0;
+
 
   double vize_sonuc=0;
   double read_sonuc=0;
@@ -56,17 +60,87 @@ class _girme_profState extends State<girme_prof> {
     return sonuc;
   }
   double speaking_hesapla(double speaking1){
-    double sonuc=((speaking1))*5/100;
+    double sonuc=((speaking1))* 10 /100;
     return sonuc;
   }
 
   double sunum_hesapla(double sunum){
-    double sonuc=(sunum*10)/100;
+    double sonuc=(sunum * 10 )/100;
     return sonuc;
   }
+
   bool isloaded= false;
   BannerAd? _bannerAd;
   BannerAd? _ad;
+  RewardedAd? rewardedAd;
+  int hak = 2;
+  late SharedPreferences _prefs; // SharedPreferences değişkeni
+
+  // SharedPreferences'ı başlatan fonksiyon
+  void _initPrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+    // SharedPreferences'tan saklanan hak sayısını kontrol edin
+    setState(() {
+      hak = _prefs.getInt('hak') ?? 2; // Varsayılan değer: 2
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadrewardads();
+    _initPrefs(); // SharedPreferences'ı başlat
+  }
+
+  loadrewardads()
+  {
+    RewardedAd.load(
+        adUnitId: "ca-app-pub-3940256099942544/5224354917",
+        request: AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+            onAdLoaded: (ad)
+            {
+              setState(() {
+                rewardedAd = ad;
+              });
+            },
+            onAdFailedToLoad: (error)
+            {
+              setState(() {
+                rewardedAd = null;
+              });
+            }
+        )
+    );
+  }
+
+  void showAds()
+  {
+    if(rewardedAd != null)
+      {
+        rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+          onAdDismissedFullScreenContent: (ad) {
+            setState(() {
+              rewardedAd!.dispose();
+              loadrewardads();
+            });
+          },
+          onAdFailedToShowFullScreenContent: (ad, error)
+          {
+            setState(() {
+              rewardedAd!.dispose();
+              loadrewardads();
+            });
+          }
+          );
+        rewardedAd!.show(onUserEarnedReward: (ad, reward) {
+          setState(() {
+            hak += 1;
+          });
+        },);
+      }
+  }
+
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -169,6 +243,16 @@ class _girme_profState extends State<girme_prof> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Text("Kalan Hak : ${hak}",style: TextStyle(
+                                color: buttonRenk,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20
+                            ),),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             Text("1.Dönem Ortalama :  ",style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -187,7 +271,7 @@ class _girme_profState extends State<girme_prof> {
                                         return "Not Giriniz";
                                       }
                                       final number = double.tryParse(tfgirdisi);
-                                      if(number!>100 || number!<0){
+                                      if(number !> 100 || number !< 0){
                                         return "0-100 olmalı ";
                                       }
                                       return null;
@@ -495,31 +579,45 @@ class _girme_profState extends State<girme_prof> {
                                       bool kontrol_sonuc6=formkey6.currentState!.validate();
                                       //bool kontrol_sonuc7=formkey7.currentState!.validate();
                                       bool kontrol_sonuc8=formkey8.currentState!.validate();
+                                      if(hak != 0)
+                                        {
+                                          if(kontrol_sonuc && kontrol_sonuc2 && kontrol_sonuc3 && kontrol_sonuc4 && kontrol_sonuc5 && kontrol_sonuc6
+                                              && kontrol_sonuc8){
+                                            setState(()
+                                            {
+                                              hak--;
+                                              ortalama_donem1=double.parse(tf1.text);
+                                              vize1=double.parse(tf2.text);
+                                              vize2=double.parse(tf3.text);
+                                              read1=double.parse(tf4.text);
+                                              read2=double.parse(tf5.text);
+                                              speak1=double.parse(tf6.text);
+                                              //speak2=double.parse(tf7.text);
+                                              sunum=double.parse(tf8.text);
+                                              vize_sonuc=vize_hesap(vize1, vize2);
+                                              read_sonuc=reading_hesapla(read1,read2);
+                                              speak_sonuc=speaking_hesapla(speak1);
+                                              sunum_sonuc=sunum_hesapla(sunum);
 
-                                      if(kontrol_sonuc && kontrol_sonuc2 && kontrol_sonuc3 && kontrol_sonuc4 && kontrol_sonuc5 && kontrol_sonuc6
-                                           && kontrol_sonuc8){
-                                        setState(() {
-                                          ortalama_donem1=double.parse(tf1.text);
-                                          vize1=double.parse(tf2.text);
-                                          vize2=double.parse(tf3.text);
-                                          read1=double.parse(tf4.text);
-                                          read2=double.parse(tf5.text);
-                                          speak1=double.parse(tf6.text);
-                                          //speak2=double.parse(tf7.text);
-                                          sunum=double.parse(tf8.text);
-                                          vize_sonuc=vize_hesap(vize1, vize2);
-                                          read_sonuc=reading_hesapla(read1,read2);
-                                          speak_sonuc=speaking_hesapla(speak1);
-                                          sunum_sonuc=sunum_hesapla(sunum);
-                                          gecici_not=65-(ortalama_donem1*40/100);
-                                          final_not=(100/24)*(gecici_not-0.6*vize_sonuc-0.6*read_sonuc-0.6*speak_sonuc-0.6*sunum_sonuc);
-                                          format=final_not.toStringAsFixed(2);
-                                        });
-                                      }
+                                              gecici_not = 65 - (ortalama_donem1 * 40 / 100);
+                                              should_be_second = (gecici_not * 100) / 60 ;
+
+                                              second_tmp = should_be_second - (vize_sonuc + read_sonuc + speak_sonuc + sunum_sonuc);
+                                              final_not= (second_tmp * 100) / 40;
+                                              format=final_not.toStringAsFixed(2);
+                                              _prefs.setInt('hak', hak);
+                                            });
+                                          }
+                                        }
+                                      else
+                                        {
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Hakkınız 0 extra hak kazanmak için reklam izleyiniz !")));
+                                          _prefs.setInt('hak', hak);
+                                        }
                                     },
-                                    child: Text("Hesapla"),
+                                    child: Text("Hesapla",style: TextStyle(color: Colors.white),),
                                     style: ElevatedButton.styleFrom(
-                                      primary: buttonRenk,
+                                      backgroundColor:  buttonRenk,
                                     )),
                               ),
                             ),
@@ -536,9 +634,9 @@ class _girme_profState extends State<girme_prof> {
                                     //tf7.clear();
                                     tf8.clear();
                                   },
-                                  child: Text("Sıfırla"),
+                                  child: Text("Sıfırla",style: TextStyle(color: Colors.white),),
                                   style: ElevatedButton.styleFrom(
-                                    primary: buttonRenk,
+                                    backgroundColor: buttonRenk,
                                   )),
                             )
                           ],
@@ -547,9 +645,21 @@ class _girme_profState extends State<girme_prof> {
                     )
                 ),
               ),
-              isloaded ? Container(
-                height: yukseklik/14.22,
-                child: AdWidget(ad: _ad!),):SizedBox(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(onPressed: ()
+                {
+                  showAds();
+                },
+                  child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                  Text("Hak İçin Reklam İzle ♥",style: TextStyle(color: Colors.white)),
+                  ],
+                ),style: ElevatedButton.styleFrom(
+                  backgroundColor: menuRenk,
+                ), ),
+              ),
             ],
           ),
         ),

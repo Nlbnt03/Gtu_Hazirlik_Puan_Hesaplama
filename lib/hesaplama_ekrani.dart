@@ -364,7 +364,7 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
                             width: genislik/3,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  primary: buttonRenk
+                                  backgroundColor: buttonRenk
                               ),
                               child: Text("HESAPLA",style: TextStyle(
                                   color: Colors.white,
@@ -477,7 +477,7 @@ class _hesaplama_ekraniState extends State<hesaplama_ekrani> {
                           width: genislik/3,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: buttonRenk,
+                              backgroundColor: buttonRenk,
                             ),
                             onPressed: (){
                               tfcontroller8.clear();

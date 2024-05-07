@@ -175,9 +175,9 @@ class _pro_hesaplamaState extends State<pro_hesaplama> {
                             width: genislik/4,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: buttonRenk
+                                backgroundColor: buttonRenk
                               ),
-                              child: Text("Hesapla"),
+                              child: Text("Hesapla",style: TextStyle(color: Colors.white,fontSize: 13),),
                               onPressed: (){
                                 setState(() {
                                   if(double.parse(tfcontroller1.text)>100 || double.parse(tfcontroller1.text)<0){
@@ -230,9 +230,9 @@ class _pro_hesaplamaState extends State<pro_hesaplama> {
                           width: genislik/4,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: buttonRenk
+                              backgroundColor: buttonRenk
                             ),
-                            child: Text("Sıfırla"),
+                            child: Text("Sıfırla",style: TextStyle(color: Colors.white,fontSize: 13),),
                             onPressed: (){
                               tfcontroller2.clear();
                               tfcontroller1.clear();

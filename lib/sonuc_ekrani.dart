@@ -69,6 +69,7 @@ class _sonuc_ekraniState extends State<sonuc_ekrani> {
           title: Text("Bilgilendirme !",style: TextStyle(
               color: Color(0xffF00000),
               fontWeight: FontWeight.bold
+
           ),),
           content: SizedBox(
             width: 80,
@@ -79,7 +80,7 @@ class _sonuc_ekraniState extends State<sonuc_ekrani> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
-                  fontSize: 16
+                  fontSize: 14
                 ),)
               ],
             ),
@@ -170,7 +171,7 @@ class _sonuc_ekraniState extends State<sonuc_ekrani> {
                            width: genislik/2,
                            child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: appbarRenk
+                                backgroundColor: appbarRenk
                               ),
                                onPressed:(){
                                   Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => hesaplama_ekrani(),));

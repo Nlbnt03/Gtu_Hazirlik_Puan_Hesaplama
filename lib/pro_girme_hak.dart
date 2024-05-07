@@ -128,7 +128,7 @@ class _pro_girme_hakState extends State<pro_girme_hak> {
                             width: genislik/2,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    primary: appbarRenk
+                                    backgroundColor: appbarRenk
                                 ),
                                 onPressed:(){
                                   Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => pro_hesaplama(),));
