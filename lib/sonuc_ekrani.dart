@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hazirlik_puan_hesaplama/hesaplama_ekrani.dart';
 import 'package:hazirlik_puan_hesaplama/last_menu.dart';
-import 'package:hazirlik_puan_hesaplama/menu.dart';
 import 'package:hazirlik_puan_hesaplama/new_menu.dart';
 import 'package:hazirlik_puan_hesaplama/renkler.dart';
 
@@ -117,7 +116,7 @@ class _sonuc_ekraniState extends State<sonuc_ekrani> {
           onPressed: (){
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => hesaplama_ekrani(),));
           },
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back,color: Colors.white,),
         ),
         title: Text("GTU Hazırlık Uygulaması",style: TextStyle(color: yaziRenk,fontFamily: "Quicksand",fontWeight: FontWeight.bold)),
         backgroundColor: appbarRenk,

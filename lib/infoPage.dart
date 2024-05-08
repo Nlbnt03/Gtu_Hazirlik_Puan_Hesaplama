@@ -26,7 +26,7 @@ class _infoPageState extends State<infoPage> {
           onPressed: (){
             Navigator.pop(context, MaterialPageRoute(builder: (context) => lastMenu(),));
           },
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back,color: Colors.white,),
         ),
         title: Text("Bilgilendirme Sayfası",style: TextStyle(color: yaziRenk,fontFamily: 'Quicksand'),),
         backgroundColor: appbarRenk,

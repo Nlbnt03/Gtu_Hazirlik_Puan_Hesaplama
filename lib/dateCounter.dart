@@ -66,7 +66,7 @@ class _dateCounterState extends State<dateCounter> {
           onPressed: (){
             Navigator.pop(context, MaterialPageRoute(builder: (context) => lastMenu(),));
           },
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back,color: Colors.white,),
         ),
         title: Text("Sınavlara Kalan Süre",style: TextStyle(color: yaziRenk,fontFamily: "Quicksand",fontWeight: FontWeight.bold)),
         centerTitle: true,

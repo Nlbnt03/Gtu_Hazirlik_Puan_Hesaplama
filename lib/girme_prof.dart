@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hazirlik_puan_hesaplama/last_menu.dart';
-import 'package:hazirlik_puan_hesaplama/menu.dart';
 import 'package:hazirlik_puan_hesaplama/new_menu.dart';
 import 'package:hazirlik_puan_hesaplama/renkler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -95,7 +94,7 @@ class _girme_profState extends State<girme_prof> {
   loadrewardads()
   {
     RewardedAd.load(
-        adUnitId: "ca-app-pub-3940256099942544/5224354917",
+        adUnitId: "ca-app-pub-3400076691045068/3477493151",
         request: AdRequest(),
         rewardedAdLoadCallback: RewardedAdLoadCallback(
             onAdLoaded: (ad)
@@ -193,7 +192,7 @@ class _girme_profState extends State<girme_prof> {
           onPressed: (){
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => lastMenu(),));
           },
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back,color: Colors.white,),
         ),
         title: Text("GTU Hazırlık Uygulaması",style: TextStyle(color: yaziRenk,fontFamily: "Quicksand",fontWeight: FontWeight.bold)),
         centerTitle: true,
@@ -645,21 +644,33 @@ class _girme_profState extends State<girme_prof> {
                     )
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(onPressed: ()
-                {
-                  showAds();
-                },
-                  child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  Text("Hak İçin Reklam İzle ♥",style: TextStyle(color: Colors.white)),
-                  ],
-                ),style: ElevatedButton.styleFrom(
-                  backgroundColor: menuRenk,
-                ), ),
-              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SizedBox(
+                      height:  yukseklik/20,
+                      child: ElevatedButton(onPressed: ()
+                      {
+                        showAds();
+                      },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("+1 Hak İçin Reklam İzle",style: TextStyle(color: Colors.white,fontSize: 13,fontWeight: FontWeight.bold)),
+                            SizedBox(
+                                width: 48,
+                                height: 48,
+                                child: Image.asset("resimler/1.png")),
+                          ],
+                        ),style: ElevatedButton.styleFrom(
+                          backgroundColor: menuRenk,
+                        ), ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),

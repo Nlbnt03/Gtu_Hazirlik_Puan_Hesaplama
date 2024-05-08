@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hazirlik_puan_hesaplama/last_menu.dart';
-import 'package:hazirlik_puan_hesaplama/menu.dart';
 import 'package:hazirlik_puan_hesaplama/new_menu.dart';
 import 'package:hazirlik_puan_hesaplama/pro_sinav_hesaplama.dart';
 import 'package:hazirlik_puan_hesaplama/renkler.dart';
@@ -74,7 +73,7 @@ class _pro_girme_hakState extends State<pro_girme_hak> {
           onPressed: (){
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => pro_hesaplama(),));
           },
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back,color: Colors.white,),
         ),
         title: Text("GTU Hazırlık Uygulaması",style: TextStyle(color: yaziRenk,fontFamily: "Quicksand",fontWeight: FontWeight.bold)),
         centerTitle: true,

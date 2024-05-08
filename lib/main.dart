@@ -5,7 +5,6 @@ import 'package:hazirlik_puan_hesaplama/dateCounter.dart';
 import 'package:hazirlik_puan_hesaplama/final_hesaplama.dart';
 import 'package:hazirlik_puan_hesaplama/hesaplama_ekrani.dart';
 import 'package:hazirlik_puan_hesaplama/last_menu.dart';
-import 'package:hazirlik_puan_hesaplama/menu.dart';
 import 'package:hazirlik_puan_hesaplama/new_menu.dart';
 import 'package:hazirlik_puan_hesaplama/pro_sinav_hesaplama.dart';
 import 'package:hazirlik_puan_hesaplama/renkler.dart';
@@ -67,6 +66,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
        primaryColor: Color(0xff0D47A1),
+        textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.black),
+        inputDecorationTheme: InputDecorationTheme(
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black), // Aktif rengi
+          ),
+        ),
+        iconTheme: IconThemeData(color: Colors.white)
       ),
       home: SplashScreen(),
     );
